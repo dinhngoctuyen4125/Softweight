@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from transformers import RobertaTokenizer
 from src.ood_utils import set_seed, collate_fn
 import os
+from huggingface_hub import snapshot_download
 from src.ood_model_selector import CodeBERTForSelector
 from src.ood_data import load_dforget
 import pickle
@@ -56,7 +57,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_name_or_path", default="tummitum/codebert-deprecated", type=str)
     parser.add_argument("--data_path", default="./data/codellama/D_forget.json", type=str)
-    parser.add_argument("--ckpt_dir", default="./ckpt", type=str)
+    parser.add_argument("--ocsvm_repo", default="tummitum/ocsvm", type=str)
     parser.add_argument("--max_seq_length", default=512, type=int)
     parser.add_argument("--batch_size", default=8, type=int)
     parser.add_argument("--seed", type=int, default=2026)
@@ -72,12 +73,13 @@ def main():
     model = CodeBERTForSelector(args.model_name_or_path, device=device)
     model.to(device)
 
-    stats = torch.load(os.path.join(args.ckpt_dir, "stats.pt"), map_location="cpu", weights_only=False)
+    ckpt_dir = snapshot_download(args.ocsvm_repo)
+    stats = torch.load(os.path.join(ckpt_dir, "stats.pt"), map_location="cpu", weights_only=False)
     mean_list = [m.to(device) for m in stats["mean_list"]]
     precision_list = [p.to(device) for p in stats["precision_list"]]
     fea_list = stats["fea_list"]
 
-    with open(os.path.join(args.ckpt_dir, "ocsvm.pkl"), "rb") as f:
+    with open(os.path.join(ckpt_dir, "ocsvm.pkl"), "rb") as f:
         c_lr = pickle.load(f)
 
     # --- 2. D_forget → Mah scores → OCSVM scores → fit Gaussian ---

@@ -15,5 +15,5 @@ export CUDA_VISIBLE_DEVICES=0
 python sw.py \
     --model_name_or_path "tummitum/codebert-deprecated" \
     --data_path "./data/codellama/D_forget.json" \
-    --ckpt_dir "./ckpt" \
+    --ocsvm_repo "tummitum/ocsvm" \
     --seed 2026
