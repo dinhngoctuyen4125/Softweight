@@ -15,5 +15,11 @@ export CUDA_VISIBLE_DEVICES=0
 python sw.py \
     --model_name_or_path "tummitum/codebert-deprecated" \
     --data_path "./data/codellama/D_forget.json" \
+    --dep_data "./data/codellama/D_test_U_dep.json" \
+    --nondep_data "./data/codellama/D_test_U_nondep.json" \
     --ocsvm_repo "tummitum/OCSVM" \
-    --seed 2026
+    --seed 2026 \
+    --num_test_samples 100 \
+    --max_seq_length 512 \
+    --batch_size 8 \
+    --output_file "./weight_results.json"
