@@ -58,8 +58,8 @@ def main():
     nondep_data = load_data(nondep_path, sample_size=100)
     
     # Extract texts as done in sw.py
-    dep_texts = [s["probing input"] + s.get("y_neg", "") for s in dep_data]
-    nondep_texts = [s["function"] for s in nondep_data]
+    dep_texts = [s["probing input"] for s in dep_data]
+    nondep_texts = [s["probing input"] for s in nondep_data]
     
     print("\nEncoding D_test_U_dep...")
     dep_embeddings = get_embeddings(dep_texts, tokenizer, model, device)
