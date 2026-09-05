@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=softweight
+#SBATCH --job-name=sw
 #SBATCH --output=logs/output_%j.log
 #SBATCH --error=logs/error_%j.log
 #SBATCH --partition=defq
@@ -15,5 +15,5 @@ export CUDA_VISIBLE_DEVICES=0
 python sw.py \
     --model_name_or_path "tummitum/codebert-deprecated" \
     --data_path "./data/codellama/D_forget.json" \
-    --ocsvm_repo "tummitum/ocsvm" \
+    --ocsvm_repo "tummitum/OCSVM" \
     --seed 2026
