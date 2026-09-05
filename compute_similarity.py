@@ -50,8 +50,8 @@ def main():
     tokenizer = RobertaTokenizer.from_pretrained(model_name)
     model = RobertaModel.from_pretrained(model_name).to(device)
     
-    dep_path = "D:/Softweight/data/codellama/D_test_U_dep.json"
-    nondep_path = "D:/Softweight/data/codellama/D_test_U_nondep.json"
+    dep_path = "/kaggle/input/datasets/meoconbngu/full-unlearning-dataset/Data-Collection/codellama/D_test_U_dep.json"
+    nondep_path = "/kaggle/input/datasets/meoconbngu/full-unlearning-dataset/Data-Collection/codellama/D_test_U_nondep.json"
     
     print("\nLoading datasets...")
     dep_data = load_data(dep_path, sample_size=100)
