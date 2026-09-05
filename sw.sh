@@ -20,6 +20,6 @@ python sw.py \
     --ocsvm_repo "tummitum/OCSVM" \
     --seed 2026 \
     --num_test_samples 100 \
-    --max_seq_length 1024 \
+    --max_seq_length 512 \
     --batch_size 8 \
     --output_file "./weight_results.json"
