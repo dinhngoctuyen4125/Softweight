@@ -127,6 +127,7 @@ def main():
 
     mah_scores = model.get_unsup_Mah_score(dataloader, mean_list, precision_list, fea_list)[:, 1:]
     d_scores = c_lr.score_samples(mah_scores)
+    np.save(args.output_file.replace(".json", "_d_forget_scores.npy"), d_scores)
     mean, std, x0 = weighting_func(d_scores)
     print("Gaussian fit: mean={:.4f}, std={:.4f}, x0={:.4f}".format(mean, std, x0))
 
