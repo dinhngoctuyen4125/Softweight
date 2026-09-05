@@ -45,3 +45,7 @@ logs/
 
 OCSVM/
 CodeBERT/
+
+weight_results_d_forget_scores.npy
+weight_results_d_forget_scores_plot.png
+
