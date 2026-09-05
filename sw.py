@@ -145,7 +145,7 @@ def main():
     with open(args.nondep_data, encoding="utf-8") as f:
         d_nondep = json.load(f)
     nondep_samples = random.sample(d_nondep, min(args.num_test_samples, len(d_nondep)))
-    nondep_texts = [s["probing input"] + s["y_neg"] for s in nondep_samples]
+    nondep_texts = [s["function"] for s in nondep_samples]
     nondep_loader = tokenize_texts(nondep_texts, tokenizer, args.max_seq_length, args.batch_size)
     nondep_mah = model.get_unsup_Mah_score(nondep_loader, mean_list, precision_list, fea_list)[:, 1:]
     nondep_ocsvm = c_lr.score_samples(nondep_mah)
